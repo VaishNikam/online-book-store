@@ -1,0 +1,45 @@
+<br /><br />
+<div class="centered">
+    Select Cateogry : <select [(ngModel)]="category" (change)="getBookByCategory()">
+        <option [value]="100">All</option>
+        <option *ngFor="let item of getCategoryList" [value]="item?.value">{{item?.name}}</option>
+    </select>
+</div>
+<br />
+<div *ngIf="bookList.length===0" class="centered">
+    No book is available in list
+</div>
+
+<div class="row">
+    <div class="col-lg-3 mt-3" *ngFor="let book of bookList;index as i">
+        <div class="itemsbox" *ngIf="bookList.length>0">
+            <!-- <p>{{book?.bookId}}</p> -->
+            <h1>{{book?.bookname}}</h1>
+            <img [src]="book?.image" />
+            <p><b>Description:</b>{{book?.description}}</p>
+            <p><b>Quantity:</b> {{book?.quantity}}</p>
+            <p><b>Author:</b>{{book?.authorName}}</p>
+            <p><b>Price:</b> {{book?.mrpPrice | currency:'INR'}}</p>
+            <button (click)="editBook(book)">Edit</button>&nbsp;
+            <button (click)="delBook(book)">Delete</button>
+        </div>
+    </div>
+</div>
+<br><br>
+
+
+
+<br />
+<div *ngIf="bookList.length>0" class="centered">
+    <app-paging
+    [totalbook]="totalbook"
+    [pageSize]="pageSize"
+    [offset]="offset"
+    (onNextPageClick)="onNextPageClick($event)"
+    (onPreviousPageClick)="onPreviousPageClick($event)"
+    (onFirstPageClick)="onFirstPageClick($event)"
+    (onLastPageClick)="onLastPageClick($event)"
+></app-paging>
+</div>
+<br />
+<br>

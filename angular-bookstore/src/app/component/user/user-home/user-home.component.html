@@ -1,0 +1,87 @@
+<div class="intro">
+    <marquee direction="left" behavior="alternate"><b> <h1>Welcome to Online Book Store,</h1></b> </marquee><br>
+    <h2>{{userName}}</h2>
+  </div>
+  <br>
+  <br>
+  <div class="container mt-5 mb-5">
+    <h1 class="text-center"><span class="highlight">How to Order Your Favorite Books!</span></h1>
+    <div class="row mt-5">
+        <!-- one  -->
+        <div class="col-lg-4 mt-2">
+            <div class="stepBox">
+                <h1>1</h1>
+                <p>View-Books</p>
+            </div>
+        </div>
+<!-- two -->
+        <div class="col-lg-4 mt-2">
+            <div class="stepBox">
+                <h1>2</h1>
+                <p>Add-to-cart</p>
+            </div>
+        </div>
+        <!-- three  -->
+        <div class="col-lg-4 mt-2">
+            <div class="stepBox">
+                <h1>3</h1>
+                <p>Order & Pay</p>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="centered">
+    <mat-button-toggle-group [value]="searchType" (change)="getSelectedType($event)">
+        <mat-button-toggle value="bycategory">Category</mat-button-toggle>
+        <mat-button-toggle value="bysearch">Search</mat-button-toggle>
+    </mat-button-toggle-group>
+</div>
+<br />
+<div *ngIf="searchType === 'bysearch'" class="centered">
+    Search:&nbsp;&nbsp; <input type="text" (keydown)="getSearchWord($event)" [(ngModel)]="searchKeyword" placeholder="Search book name">
+</div>
+<br /><br />
+<div class="centered" *ngIf="searchType === 'bycategory'">
+    Select Cateogry :   <select [(ngModel)]="category" (change)="getBookByCategory()">
+        <option [value]="100">All</option>
+        <option *ngFor="let item of getCategoryList" [value]="item?.value">{{item?.name}}</option>
+    </select>
+</div>
+<br />
+<br />
+
+<div class="row">
+    <div class="col-lg-3 mt-3" *ngFor="let book of bookList;index as i">
+        <div class="itemsbox" *ngIf="bookList.length>0">
+            <!-- <p>{{book?.bookId}}</p> -->
+            <h1>{{book?.bookname}}</h1>
+            <img [src]="book?.image" />
+            <p><b>Author:</b>{{book?.authorName}}</p>
+            <p><b>Description:</b>{{book?.description}}</p>
+            <p><b>Quantity:</b> {{book?.quantity}}</p>
+            <p><b>Price:</b> {{book?.mrpPrice | currency:'INR'}}</p>
+            <input type ="text" [id]="book?.bookId" name="addquantity" placeholder="Add-quantity"/>
+            <button (click)="addToCart(book)">Add-to-cart</button>&nbsp;
+            
+        </div>
+    </div>
+</div>
+<br>
+<div *ngIf="bookList.length === 0" class="centered">
+    No book avaiable
+</div>
+
+<br />
+<div *ngIf="bookList.length>0" class="centered">
+    <app-paging
+        [totalbook]="totalbook"
+        [pageSize]="pageSize"
+        [offset]="offset"
+        (onNextPageClick)="onNextPageClick($event)"
+        (onPreviousPageClick)="onPreviousPageClick($event)"
+        (onFirstPageClick)="onFirstPageClick($event)"
+        (onLastPageClick)="onLastPageClick($event)"
+    ></app-paging>
+</div>
+<br />

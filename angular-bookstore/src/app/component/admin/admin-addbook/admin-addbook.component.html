@@ -1,0 +1,65 @@
+<br>
+<br>
+<br>
+<div class="add-book-tab">
+
+<div class="centered">
+    <h1>Add Books </h1>
+</div>
+<br />
+<div class="centered">
+<table >
+    <tr>
+        <td>Book Name</td>
+        <td>
+            <input type="text" [(ngModel)]="bookname" />
+        </td>
+    </tr>
+    <tr>
+        <td>Category</td>
+        <td>
+            <select [(ngModel)]="category">
+                <option *ngFor="let item of getCategoryList" [value]="item?.value">{{item?.name}}</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>Image</td>
+        <td>
+            <input type="text" [(ngModel)]="image"/>
+        </td>
+    </tr>
+    <tr>
+        <td>Description</td>
+        <td>
+            <input type="text" [(ngModel)]="description"/>
+        </td>
+    </tr>
+   
+    <tr>
+        <td>Mrp Price</td>
+        <td>
+            <input type="number" [(ngModel)]="mrpPrice"/>
+        </td>
+    </tr>
+    <tr>
+        <td>Quantity</td>
+        <td>
+            <input type="number" [(ngModel)]="quantity"/>
+        </td>
+    </tr>
+    <tr>
+        <td>Author</td>
+        <td>
+            <input type="text" [(ngModel)]="authorName"/>
+        </td>
+    </tr>
+       
+</table>
+</div>
+<br />
+<div class="centered"><button (click)="onAddBook()"  mat-raised-button color="primary" style="background-color: rgb(16, 40, 85) ;color:rgb(249, 229, 254);">{{ isEdit ? 'Update' : 'Add Book'}}</button></div>
+</div>
+<br>
+<br>
+<br>

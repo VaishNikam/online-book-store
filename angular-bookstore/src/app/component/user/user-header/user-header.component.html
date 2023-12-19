@@ -1,0 +1,10 @@
+<header class="header">
+    <a class="logo"><i class="fa fa-book"></i>BOOK HOUSE</a>
+    <nav class="nav-items">
+      <i class="fa fa-home"></i><a (click)="routerToLink('/user/home')" [class.selected]="url === '/user/home'">Home</a>
+      <i class="fa fa-user-circle"></i><a (click)="routerToLink('/user/cart')" [class.selected]="url === '/user/cart'">Cart</a>
+      <i class="fa fa-user-circle"></i><a (click)="routerToLink('/user/order')" [class.selected]="url === '/user/order'">Order</a>
+      <i class="fa fa-sign-out"></i><a (click)="routerToLink('/user/logout')" [class.selected]="url === '/user/logout'">Logout</a>
+    </nav>
+  </header>
+
